@@ -6,6 +6,7 @@ body {
 }
 
 .container {
+
   max-width: 600px;
   margin: auto;
   background: #fff;
@@ -46,8 +47,13 @@ body {
   font-size: 18px;
   border-radius: 4px;
   cursor: pointer;
-  width: 100%;
-  margin-top: 20px;
+  width: calc(100% - 60px);
+  /* Adjust width to leave space for padding */
+  position: fixed;
+  bottom: 20px;
+  /* Distance from the bottom */
+  left: 30px;
+  /* Adjust left position as needed */
 }
 
 .submit-btn:hover {
@@ -88,28 +94,39 @@ body {
 }
 
 .featured-label {
-    display: flex;
-    justify-content: space-between; /* Space out the label and checkbox */
-    align-items: center; /* Align items vertically */
-    width: 100%; /* Ensure full width */
-    margin-top: 20px;
-  } /* Push the label and checkbox to the right */
+  display: flex;
+  justify-content: space-between;
+  /* Space out the label and checkbox */
+  align-items: center;
+  /* Align items vertically */
+  width: 100%;
+  /* Ensure full width */
+  margin-top: 20px;
+}
 
-  .form-switch {
-    order: 2; /* Push the checkbox to the right */
-  }
+/* Push the label and checkbox to the right */
+
+.form-switch {
+  order: 2;
+  /* Push the checkbox to the right */
+}
 
 .form-switch input[type="checkbox"] {
   position: relative;
   display: inline-block;
-  width: 40px; /* Adjust width as needed */
-  height: 20px; /* Adjust height as needed */
+  width: 40px;
+  /* Adjust width as needed */
+  height: 20px;
+  /* Adjust height as needed */
   -webkit-appearance: none;
   appearance: none;
   outline: none;
-  border: 2px solid #ccc; /* Border color */
-  border-radius: 20px; /* Make it round */
-  background-color: #fff; /* Background color */
+  border: 2px solid #ccc;
+  /* Border color */
+  border-radius: 20px;
+  /* Make it round */
+  background-color: #fff;
+  /* Background color */
   cursor: pointer;
   vertical-align: middle;
 }
@@ -117,56 +134,79 @@ body {
 .form-switch input[type="checkbox"]::before {
   content: '';
   position: absolute;
-  width: 18px; /* Width of the toggle */
-  height: 18px; /* Height of the toggle */
-  background-color: #ccc; /* Toggle color */
-  border-radius: 60%; /* Make it round */
-  transition: 0.3s; /* Smooth transition */
+  width: 18px;
+  /* Width of the toggle */
+  height: 18px;
+  /* Height of the toggle */
+  background-color: #ccc;
+  /* Toggle color */
+  border-radius: 60%;
+  /* Make it round */
+  transition: 0.3s;
+  /* Smooth transition */
 }
 
 .form-switch input[type="checkbox"]:checked::before {
-  transform: translateX(20px); /* Move toggle to the right */
-  background-color: #007bff; /* Toggle color when checked */
+  transform: translateX(20px);
+  /* Move toggle to the right */
+  background-color: #007bff;
+  /* Toggle color when checked */
 }
 
 .form-check-input[type="radio"] {
-  width: 20px; /* Set width */
-  height: 20px; /* Set height */
-  margin-right: 5px; /* Adjust spacing */
-  appearance: none; /* Hide default appearance */
-  border: 2px solid #007bff; /* Border color */
-  border-radius: 50%; /* Make it round */
-  outline: none; /* Remove outline */
-  cursor: pointer; /* Add cursor pointer */
+  width: 20px;
+  /* Set width */
+  height: 20px;
+  /* Set height */
+  margin-right: 5px;
+  /* Adjust spacing */
+  appearance: none;
+  /* Hide default appearance */
+  border: 2px solid #007bff;
+  /* Border color */
+  border-radius: 50%;
+  /* Make it round */
+  outline: none;
+  /* Remove outline */
+  cursor: pointer;
+  /* Add cursor pointer */
 }
 
 /* Custom styling for checked state */
 .form-check-input[type="radio"]:checked {
-  background-color: #007bff; /* Change background color when checked */
+  background-color: #007bff;
+  /* Change background color when checked */
 }
 
 /* Custom styling for label */
 .form-check-label {
-  font-size: 16px; /* Set font size */
+  font-size: 16px;
+  /* Set font size */
 }
 
 /* Optional: Add hover effect */
 .form-check-input[type="radio"]:hover {
-  border-color: #007bff; /* Change border color on hover */
+  border-color: #007bff;
+  /* Change border color on hover */
 }
 
 .upload-container {
-  width: 300px; /* Adjust width as needed */
-  height: 200px; /* Adjust height as needed */
-  border: 2px dashed #aaa; /* Dashed border */
-  border-radius: 8px; /* Rounded corners */
+  width: 300px;
+  /* Adjust width as needed */
+  height: 200px;
+  /* Adjust height as needed */
+  border: 2px dashed #aaa;
+  /* Dashed border */
+  border-radius: 8px;
+  /* Rounded corners */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .upload-container.dragover {
-  border-color: #007bff; /* Change border color when dragging over */
+  border-color: #007bff;
+  /* Change border color when dragging over */
 }
 
 .upload-label {
