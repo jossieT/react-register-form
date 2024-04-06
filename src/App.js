@@ -1,23 +1,20 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import RegisterItemForm from './components/RegisterItemForm';
+import { Roboto } from 'google-fonts';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="title-container">
+          <h3>New Dress</h3>
+          <span className="emoji" role="img" aria-label="dress emoji">👗</span>
+        </div>
       </header>
+      <main>
+        <RegisterItemForm />
+      </main>
     </div>
   );
 }

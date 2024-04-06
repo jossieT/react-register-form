@@ -1,38 +1,179 @@
-.App {
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.checkbox-label {
+  margin-left: 5px;
+}
+
+.submit-btn {
+  background-color: rgb(68, 44, 204);
+  color: #fff;
+  border: 1px solid rgb(108, 93, 190);
+  ;
+  padding: 10px 0;
+  /* Adjust padding to center content vertically */
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.submit-btn:hover {
+  background-color: #b90bb9;
+  /* Lighter magenta on hover */
+  border-color: #9e0b9e;
+  /* Lighter magenta border on hover */
+}
+
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  /* Align items to both ends of the container */
+}
+
+.title {
+  margin: 0;
+  /* Remove default margin */
+}
+
+.emoji {
+  margin-left: auto;
+  font-size: 1.5em;
+  margin-top: 15px;
+  /* Push the emoji to the right end */
+}
+
+.title-container {
+  max-width: 600px;
+  margin: auto;
+  background: #fff;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 1px;
+  text-align: left;
+  margin-top: 10px;
+  padding-top: 5px;
+}
+
+.featured-label {
+    display: flex;
+    justify-content: space-between; /* Space out the label and checkbox */
+    align-items: center; /* Align items vertically */
+    width: 100%; /* Ensure full width */
+    margin-top: 20px;
+  } /* Push the label and checkbox to the right */
+
+  .form-switch {
+    order: 2; /* Push the checkbox to the right */
+  }
+
+.form-switch input[type="checkbox"] {
+  position: relative;
+  display: inline-block;
+  width: 40px; /* Adjust width as needed */
+  height: 20px; /* Adjust height as needed */
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  border: 2px solid #ccc; /* Border color */
+  border-radius: 20px; /* Make it round */
+  background-color: #fff; /* Background color */
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.form-switch input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  width: 18px; /* Width of the toggle */
+  height: 18px; /* Height of the toggle */
+  background-color: #ccc; /* Toggle color */
+  border-radius: 60%; /* Make it round */
+  transition: 0.3s; /* Smooth transition */
+}
+
+.form-switch input[type="checkbox"]:checked::before {
+  transform: translateX(20px); /* Move toggle to the right */
+  background-color: #007bff; /* Toggle color when checked */
+}
+
+.form-check-input[type="radio"] {
+  width: 20px; /* Set width */
+  height: 20px; /* Set height */
+  margin-right: 5px; /* Adjust spacing */
+  appearance: none; /* Hide default appearance */
+  border: 2px solid #007bff; /* Border color */
+  border-radius: 50%; /* Make it round */
+  outline: none; /* Remove outline */
+  cursor: pointer; /* Add cursor pointer */
+}
+
+/* Custom styling for checked state */
+.form-check-input[type="radio"]:checked {
+  background-color: #007bff; /* Change background color when checked */
+}
+
+/* Custom styling for label */
+.form-check-label {
+  font-size: 16px; /* Set font size */
+}
+
+/* Optional: Add hover effect */
+.form-check-input[type="radio"]:hover {
+  border-color: #007bff; /* Change border color on hover */
+}
+
+.upload-container {
+  width: 300px; /* Adjust width as needed */
+  height: 200px; /* Adjust height as needed */
+  border: 2px dashed #aaa; /* Dashed border */
+  border-radius: 8px; /* Rounded corners */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-container.dragover {
+  border-color: #007bff; /* Change border color when dragging over */
+}
+
+.upload-label {
+  cursor: pointer;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.upload-input {
+  display: none;
 }
