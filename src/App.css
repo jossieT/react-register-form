@@ -45,21 +45,20 @@ body {
   padding: 10px 0;
   /* Adjust padding to center content vertically */
   font-size: 18px;
-  border-radius: 4px;
   cursor: pointer;
-  width: calc(100% - 60px);
+  width: 100%;
   /* Adjust width to leave space for padding */
   position: fixed;
-  bottom: 20px;
-  /* Distance from the bottom */
-  left: 30px;
-  /* Adjust left position as needed */
+  bottom: 0px;
+  left: 0px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 .submit-btn:hover {
-  background-color: #b90bb9;
+  background-color: rgb(115, 100, 202);
   /* Lighter magenta on hover */
-  border-color: #9e0b9e;
+  border-color: rgb(115, 100, 202);
   /* Lighter magenta border on hover */
 }
 
