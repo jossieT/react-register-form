@@ -42,13 +42,15 @@ body {
   color: #fff;
   border: 1px solid rgb(108, 93, 190);
   ;
-  padding: 10px 0;
   /* Adjust padding to center content vertically */
   font-size: 18px;
   cursor: pointer;
   width: 100%;
+  margin-top: 30px;
+  height: 40px;
   /* Adjust width to leave space for padding */
   position: fixed;
+  /* top: 50px; */
   bottom: 0px;
   left: 0px;
   border-top-left-radius: 3px;
@@ -201,6 +203,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 50px;
+  margin-top: 25px;
 }
 
 .upload-container.dragover {
