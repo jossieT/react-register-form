@@ -1,11 +1,80 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import NestedDropdown from './NestedDropdown';
 import axios from 'axios';
 
 const RegisterItemForm = () => {
     const { register, handleSubmit } = useForm();
     const [isDragging, setIsDragging] = useState(false);
+
+    const options = [
+        [
+            { label: 'Style By Length', value: 'length' },
+            { label: 'Style by Dark Colors', value: 'darkColors' },
+            { label: 'Style by Light Colors', value: 'lightColors' }
+        ],
+        [
+            [
+                { label: 'Floor Length Dresses', value: 'floorLength' },
+                { label: 'Dresses With Train', value: 'dressesWithTrain' },
+                { label: 'Cocktail Dresses', value: 'cocktail' },
+                { label: 'Midi Dresses', value: 'midi' }
+            ],
+            [
+                { label: 'Black Dresses', value: 'black' },
+                { label: 'Blue Dresses', value: 'blue' },
+                { label: 'Red Dresses', value: 'red' },
+                { label: 'Maroon Dresses', value: 'maroon' },
+                { label: 'Green Dresses', value: 'green' }
+            ],
+            [
+                { label: 'White Dresses', value: 'white' },
+                { label: 'Gold Dresses', value: 'gold' },
+                { label: 'Silver Dresses', value: 'silver' },
+                { label: 'Light Blue Dresses', value: 'lightBlue' },
+                { label: 'Pink Dresses', value: 'pink' },
+                { label: 'Yellow Dresses', value: 'yellow' }
+            ]
+        ]
+    ];
+
+    const eventStyle = [
+        [
+            { label: 'Student Events', value: 'student' },
+            { label: 'Formal Events', value: 'formal' },
+            { label: 'Wedding Guest Dresses', value: 'wedding' }
+        ],
+        [
+            [
+                { label: 'Winter Formal Dress', value: 'winterFormal' },
+                { label: 'Prom Dresses', value: 'prom' },
+                { label: 'Homecoming Dresses', value: 'homecoming' },
+                { label: 'Graduation Dresses', value: 'graduation' }
+            ],
+            [
+                { label: 'Black Tie Dresses', value: 'blackTie' },
+                { label: 'Semi-Formal Dress', value: 'semiFormal' },
+                { label: 'Cocktail Party Dress', value: 'cocktail' },
+                { label: 'Holiday Party Dress', value: 'holiday' },
+                { label: 'Sunday Best Dress', value: 'sundayBest' }
+            ],
+            [
+                { label: 'All Wedding Guest Dresses', value: 'allWedding' },
+                { label: 'Mother of the Bride/Groom Dresses', value: 'motherOfBride' },
+                { label: 'Bridesmaid Dresses', value: 'bridesmaid' },
+                { label: 'Black Tie Wedding Guest Dresses', value: 'blackTieWedding' },
+                { label: 'Semi Formal Wedding Guest Dresses', value: 'semiFormalWedding' }
+            ]
+        ]
+    ];
+
+    const [selectedValues, setSelectedValues] = useState([]);
+
+    const handleSelectionChange = (values) => {
+        setSelectedValues(values);
+    };
+
 
     const [selectedEvent, setSelectedEvent] = useState('');
     const [selectedSubEvents, setSelectedSubEvents] = useState([]);
@@ -18,9 +87,9 @@ const RegisterItemForm = () => {
     const handleSubEventChange = (event) => {
         const { value, checked } = event.target;
         if (checked) {
-            setSelectedSubEvents([...selectedSubEvents, value]); // Add the value to selectedSubEvents array
+            setSelectedSubEvents((prevSelected) => [...prevSelected, value]); // Add the value to selectedSubEvents array
         } else {
-            setSelectedSubEvents(selectedSubEvents.filter((item) => item !== value)); // Remove the value from selectedSubEvents array
+            setSelectedSubEvents((prevSelected) => prevSelected.filter((item) => item !== value)); // Remove the value from selectedSubEvents array
         }
     };
 
@@ -111,144 +180,17 @@ const RegisterItemForm = () => {
                     <Form.Control type="text" placeholder="Enter Brand name" {...register('supplierName')} />
                 </Form.Group>
 
-                {/* <Form.Group controlId="section">
-                    <Form.Label>Section</Form.Label>
-                    <Row>
-                        <Col>
-                            <Form.Check type="radio" label="Men" value="men" {...register('section')} />
-                        </Col>
-                        <Col>
-                            <Form.Check type="radio" label="Women" value="women" {...register('section')} />
-                        </Col>
-                    </Row>
-                </Form.Group> */}
+
 
                 <Form.Group controlId="mainEvent">
-                    <Form.Label>Attach Dress to an Event</Form.Label>
-                    <Form.Control as="select" value={selectedEvent} onChange={handleEventChange}>
-                        <option value="">Select Main Event</option>
-                        <option value="student">Student Events</option>
-                        <option value="formal">Formal Events</option>
-                        <option value="wedding">Wedding Guest Dresses</option>
-                    </Form.Control>
+                    <Form.Label>Attach Dress to a Style</Form.Label>
+                    <NestedDropdown options={options} selectedValues={selectedValues} onSelectionChange={handleSelectionChange} />
                 </Form.Group>
 
-                {selectedEvent && (
-                    <Form.Group controlId="subEvents">
-                        <Form.Label>Select applicable event to the dress</Form.Label>
-                        {selectedEvent === 'student' && (
-                            <>
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Winter Formal Dress"
-                                    value="winterFormal"
-                                    checked={selectedSubEvents.includes('winterFormal')}
-                                    onChange={handleSubEventChange}
-                                />
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Prom Dresses"
-                                    value="prom"
-                                    checked={selectedSubEvents.includes('prom')}
-                                    onChange={handleSubEventChange}
-                                />
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Homecoming Dresses"
-                                    value="homecoming"
-                                    checked={selectedSubEvents.includes('homecoming')}
-                                    onChange={handleSubEventChange}
-                                />
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Graduation Dresses"
-                                    value="graduation"
-                                    checked={selectedSubEvents.includes('graduation')}
-                                    onChange={handleSubEventChange}
-                                />
-                            </>
-                        )}
-                        {selectedEvent === 'formal' && (
-                            <>
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Black Tie Dresses"
-                                    value="blackTie"
-                                    checked={selectedSubEvents.includes('blackTie')}
-                                    onChange={handleSubEventChange}
-                                />
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Semi-Formal Dress"
-                                    value="semiFormal"
-                                    checked={selectedSubEvents.includes('semiFormal')}
-                                    onChange={handleSubEventChange}
-                                />
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Cocktail Party Dress"
-                                    value="cocktail"
-                                    checked={selectedSubEvents.includes('cocktail')}
-                                    onChange={handleSubEventChange}
-                                />
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Holiday Party Dress"
-                                    value="holiday"
-                                    checked={selectedSubEvents.includes('holiday')}
-                                    onChange={handleSubEventChange}
-                                />
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Sunday Best Dress"
-                                    value="sundayBest"
-                                    checked={selectedSubEvents.includes('sundayBest')}
-                                    onChange={handleSubEventChange}
-                                />
-                            </>
-                        )}
-                        {selectedEvent === 'wedding' && (
-                            <>
-                                <Form.Check
-                                    type="checkbox"
-                                    label="All Wedding Guest Dresses"
-                                    value="allWedding"
-                                    checked={selectedSubEvents.includes('allWedding')}
-                                    onChange={handleSubEventChange}
-                                />
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Mother of the Bride/Groom Dresses"
-                                    value="motherOfBride"
-                                    checked={selectedSubEvents.includes('motherOfBride')}
-                                    onChange={handleSubEventChange}
-                                />
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Bridesmaid Dresses"
-                                    value="bridesmaid"
-                                    checked={selectedSubEvents.includes('bridesmaid')}
-                                    onChange={handleSubEventChange}
-                                />
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Black Tie Wedding Guest Dresses"
-                                    value="blackTieWedding"
-                                    checked={selectedSubEvents.includes('blackTieWedding')}
-                                    onChange={handleSubEventChange}
-                                />
-                                <Form.Check
-                                    type="checkbox"
-                                    label="Semi Formal Wedding Guest Dresses"
-                                    value="semiFormalWedding"
-                                    checked={selectedSubEvents.includes('semiFormalWedding')}
-                                    onChange={handleSubEventChange}
-                                />
-                            </>
-                        )}
-                    </Form.Group>
-                )}
-
+                <Form.Group controlId="useEvent">
+                    <Form.Label>Attach Dress to an Event</Form.Label>
+                    <NestedDropdown options={eventStyle} selectedValues={selectedValues} onSelectionChange={handleSelectionChange} />
+                </Form.Group>
 
                 <Form.Group controlId="additionalImages" className="additional-image">
                     <div
