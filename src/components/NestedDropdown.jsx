@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { AiOutlineClose } from "react-icons/ai";
+
 const NestedDropdown = ({ options, selectedValues, onSelectionChange }) => {
     const [mainEvent, setMainEvent] = useState('');
     const [subEvents, setSubEvents] = useState([]);
@@ -51,5 +53,7 @@ const NestedDropdown = ({ options, selectedValues, onSelectionChange }) => {
         </div>
     );
 };
+
+
 
 export default NestedDropdown;

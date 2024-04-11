@@ -8,6 +8,16 @@ const RegisterItemForm = () => {
     const { register, handleSubmit } = useForm();
     const [isDragging, setIsDragging] = useState(false);
 
+    const [selectedImages, setSelectedImages] = useState([]);
+
+    const handleFileSelection = (files) => {
+        // Convert FileList to array
+        const fileList = Array.from(files);
+
+        // Update selectedImages state with the selected files
+        setSelectedImages(fileList);
+    };
+
     const options = [
         [
             { label: 'Style By Length', value: 'length' },
@@ -113,6 +123,19 @@ const RegisterItemForm = () => {
         console.log(data); // You can send this data to your server using axios
     };
 
+    const [selectedImage, setSelectedImage] = useState(null);
+    const handleInputChange = (event) => {
+        handleFileSelection(event); // Call the parent component's file selection handler
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setSelectedImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     return (
         <div className="container">
             <Form onSubmit={handleSubmit(onSubmit)}>
@@ -153,7 +176,7 @@ const RegisterItemForm = () => {
                     </div>
                 </Form.Group>
 
-                <Form.Group controlId="uploadImage" className="form-group">
+                {/* <Form.Group controlId="uploadImage" className="form-group">
                     <div
                         className={`upload-container ${isDragging ? 'dragover' : ''}`}
                         onDragOver={handleDragEnter}
@@ -166,7 +189,27 @@ const RegisterItemForm = () => {
                             <Form.Control type="file" id="uploadImage" className="upload-input" {...register('uploadImage')} />
                         </label>
                     </div>
-                </Form.Group>
+                </Form.Group> */}
+                <Form.Group controlId="uploadImage" className="form-group">
+            <div className={`upload-container ${isDragging ? 'dragover' : ''}`}>
+                <label htmlFor="uploadImage" className="upload-label">
+                    <span>Drag & drop image here or select an image</span>
+                    <Form.Control
+                        type="file"
+                        id="uploadImage"
+                        className="upload-input"
+                        {...register('uploadImage')}
+                        onChange={handleInputChange}
+                    />
+                </label>
+                {selectedImage && (
+                    <div className="image-preview">
+                        <img src={selectedImage} alt="Selected" width="200" height="200" />
+                    </div>
+                )}
+            </div>
+        </Form.Group>
+
 
                 <Form.Group controlId="unlimitedSupply" className="form-group">
                     <div className="featured-label">
@@ -201,11 +244,35 @@ const RegisterItemForm = () => {
                         onDrop={handleDrop}
                     >
                         <label htmlFor="additionalImages" className="upload-label">
-                            <span>Drag & drop images here select images from your device</span>
-                            <Form.Control type="file" id="additionalImages" className="upload-input" multiple {...register('additionalImages')} />
+                            <span>Drag & drop images here or select images from your device</span>
+                            <Form.Control
+                                type="file"
+                                id="additionalImages"
+                                className="upload-input"
+                                multiple
+                                onChange={(e) => handleFileSelection(e.target.files)}
+                            />
                         </label>
                     </div>
+                    <div className="selected-images">
+                        {selectedImages && selectedImages.length > 0 && (
+                            <ul>
+                                {selectedImages.map((file, index) => (
+                                    <li key={index}>
+                                        <strong>Name:</strong> {file.name}, <strong>Type:</strong> {file.type}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
                 </Form.Group>
+
+                {/* <Form.Group controlId="additionalImages" className="additional-image">
+                    <Form.Label>Additional Images</Form.Label>
+                    <MultipleImageSelector selectedImages={[]} setSelectedImages={() => { }} />
+                </Form.Group> */}
+
+
                 <Button className="submit-btn" variant="primary" type="submit">
                     Submit Dress for Review
                 </Button>
