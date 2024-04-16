@@ -10,6 +10,10 @@ const RegisterItemForm = () => {
 
     const [selectedImages, setSelectedImages] = useState([]);
 
+    const handleDeselectImage = (indexToRemove) => {
+        setSelectedImages((prevImages) => prevImages.filter((_, index) => index !== indexToRemove));
+    };
+
     const handleFileSelection = (files) => {
         // Convert FileList to array
         const fileList = Array.from(files);
@@ -191,24 +195,24 @@ const RegisterItemForm = () => {
                     </div>
                 </Form.Group> */}
                 <Form.Group controlId="uploadImage" className="form-group">
-            <div className={`upload-container ${isDragging ? 'dragover' : ''}`}>
-                <label htmlFor="uploadImage" className="upload-label">
-                    <span>Drag & drop image here or select an image</span>
-                    <Form.Control
-                        type="file"
-                        id="uploadImage"
-                        className="upload-input"
-                        {...register('uploadImage')}
-                        onChange={handleInputChange}
-                    />
-                </label>
-                {selectedImage && (
-                    <div className="image-preview">
-                        <img src={selectedImage} alt="Selected" width="200" height="200" />
+                    <div className={`upload-container ${isDragging ? 'dragover' : ''}`}>
+                        <label htmlFor="uploadImage" className="upload-label">
+                            <span>Drag & drop image here or select an image</span>
+                            <Form.Control
+                                type="file"
+                                id="uploadImage"
+                                className="upload-input"
+                                {...register('uploadImage')}
+                                onChange={handleInputChange}
+                            />
+                        </label>
+                        {selectedImage && (
+                            <div className="image-preview">
+                                <img src={selectedImage} alt="Selected" />
+                            </div>
+                        )}
                     </div>
-                )}
-            </div>
-        </Form.Group>
+                </Form.Group>
 
 
                 <Form.Group controlId="unlimitedSupply" className="form-group">
@@ -256,13 +260,19 @@ const RegisterItemForm = () => {
                     </div>
                     <div className="selected-images">
                         {selectedImages && selectedImages.length > 0 && (
-                            <ul>
+                            <div className="image-grid">
                                 {selectedImages.map((file, index) => (
-                                    <li key={index}>
-                                        <strong>Name:</strong> {file.name}, <strong>Type:</strong> {file.type}
-                                    </li>
+                                    <div key={index} className="image-container">
+                                        <div className="image-preview">
+                                            <img src={URL.createObjectURL(file)} alt={file.name} />
+                                            <button className="deselect-button" onClick={() => handleDeselectImage(index)}>X</button>
+                                        </div>
+                                        <div className="image-info">
+                                            {/* <strong>Name:</strong> {file.name} */}
+                                        </div>
+                                    </div>
                                 ))}
-                            </ul>
+                            </div>
                         )}
                     </div>
                 </Form.Group>

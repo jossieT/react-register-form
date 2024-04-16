@@ -195,8 +195,10 @@ body {
 .upload-container {
   border: 2px dashed #ccc;
   display: flex;
-  justify-content: center; /* Horizontally center */
-  align-items: center; /* Vertically center */
+  justify-content: center;
+  /* Horizontally center */
+  align-items: center;
+  /* Vertically center */
   border: 2px dashed #ccc;
   height: 200px;
   flex-direction: column;
@@ -248,4 +250,45 @@ body {
 
 .upload-input {
   display: none;
+}
+
+.upload-container img {
+  width: 200px;
+  /* Ensures the image does not exceed the width of the container */
+  height: 200px;
+  /* Ensures the image does not exceed the height of the container */
+}
+
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+
+
+.image-row {
+  display: flex;
+}
+
+.image-container {
+  margin-right: 10px;
+  position: relative;
+}
+
+.image-container img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.deselect-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1;
 }
